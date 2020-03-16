@@ -1,9 +1,9 @@
 import React from 'react';
 
 const Content = (props) => {
-    console.log(props.dataSeluruhSurah, 'data props')
+    // console.log(props.dataSeluruhSurah, 'data props')
     return (
-        <div className="container bg-warning">
+        <div className="container bg-warning mt-4">
             <h5 className="text-light text-center" >List Surah</h5>
             <div className="container-fluid">
                 <div className="row bg-succes justify-content-center">
