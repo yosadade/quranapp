@@ -12,7 +12,9 @@ class App extends Component {
     this.state = {
       dataSeluruhSurah: [],
       searchValue: '',
-      newData: []
+      newData: null,
+      judulSurah: '',
+      isiSurah: null,
     }
   }
 
@@ -35,7 +37,8 @@ class App extends Component {
   onHandleInput = (e) => {
     console.log('sedang mengetik ...', e.target.value)
     this.setState({
-      searchValue: e.target.value
+      searchValue: e.target.value,
+      isiSurah: null
     }, () => {
       console.log(this.state.searchValue, 'searhValue')
       // jika dataSeluruhSuah ada isinya
@@ -46,9 +49,32 @@ class App extends Component {
           )
         })
         this.setState({
-          newData: searchSurah
+          newData: searchSurah,
         })
       }
+    })
+  }
+
+  bacaSurah = (nomor, namaSurah) => {
+    axios.get(`https://api.banghasan.com/quran/format/json/surat/${nomor}/ayat/1-10`)
+    .then(res => {
+      // console.log(res.data.ayat.data.ar)
+      this.setState({
+        searchValue: '',
+        isiSurah : res.data.ayat.data.ar,
+        judulSurah: namaSurah
+      }, () => {
+        console.log(this.state.judulSurah)
+        console.log(this.state.isiSurah)
+      })
+    })
+  }
+
+  backHome = () => {
+    // console.log('backhome')
+    this.setState({
+      isiSurah : null,
+      newData: null
     })
   }
 
@@ -58,10 +84,15 @@ class App extends Component {
         <Header />
         <Searchbar
           onHandleInput={this.onHandleInput}
-          searchValue={this.searchValue}
+          searchValue={this.state.searchValue}
         />
         <Content
-          dataSeluruhSurah={this.state.newData}
+          dataSeluruhSurah={this.state.dataSeluruhSurah}
+          dataSeluruh={this.state.newData}
+          isiSurah={this.state.isiSurah}
+          bacaSurah={this.bacaSurah} 
+          backHome={this.backHome}
+          namaSurah={this.state.judulSurah}
         />
       </div>
     )
