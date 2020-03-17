@@ -82,10 +82,6 @@ class App extends Component {
     return (
       <div className="app">
         <Header />
-        <Searchbar
-          onHandleInput={this.onHandleInput}
-          searchValue={this.state.searchValue}
-        />
         <Content
           dataSeluruhSurah={this.state.dataSeluruhSurah}
           dataSeluruh={this.state.newData}
@@ -93,6 +89,8 @@ class App extends Component {
           bacaSurah={this.bacaSurah} 
           backHome={this.backHome}
           namaSurah={this.state.judulSurah}
+          onHandleInput={this.onHandleInput}
+          searchValue={this.state.searchValue}
         />
       </div>
     )

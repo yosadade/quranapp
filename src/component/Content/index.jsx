@@ -1,6 +1,7 @@
 import React from 'react';
 import ListSurah from '../ListSurah/index';
 import IsiSurah from '../IsiSurah';
+import SearchBar from '../Searchbar';
 
 const Content = (props) => {
     // console.log(props.dataSeluruhSurah, 'data props')
@@ -27,6 +28,10 @@ const Content = (props) => {
                 {
                     props.dataSeluruhSurah && !props.isiSurah 
                     ? <div>
+                        <SearchBar
+                            onHandleInput={props.onHandleInput}
+                            searchValue={props.searchValue}
+                        />
                         <h3 className="text-light p-5 text-center">
                             Daftar Surah
                         </h3>
